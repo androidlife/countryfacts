@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="row_padding">14dp</dimen>
+    <dimen name="row_space_top">10dp</dimen>
+    <dimen name="row_space_bottom">10dp</dimen>
+</resources>

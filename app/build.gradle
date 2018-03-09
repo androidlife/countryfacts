@@ -3,6 +3,9 @@ ext {
     app = [
             name: 'Country-Facts'
     ]
+    ver = [
+            supportLib: '26.1.0'
+    ]
 }
 android {
     compileSdkVersion 26
@@ -26,12 +29,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    //com.android.support:support-fragment:27.0.2
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:support-fragment:$ver.supportLib"
+        force "com.android.support:support-annotations:$ver.supportLib"
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.jakewharton:butterknife:8.8.1'
+
+    implementation'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -39,8 +52,14 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
+    implementation "com.android.support:recyclerview-v7:$ver.supportLib"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

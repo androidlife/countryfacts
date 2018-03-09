@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--<android.support.constraint.ConstraintLayout --><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:paddingBottom="14dp"--><!--android:paddingLeft="14dp"--><!--android:paddingRight="14dp"--><!--android:paddingTop="14dp"--><!--android:background="@drawable/row_view_bg">-->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#646c93"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Murdochs needed counselling after hacking scandal" />
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:layout_width="96dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:src="@drawable/ic_placeholder" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#595959"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/img_view"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="NEW YORK: The British phone-hacking scandal brought simmering tensions." />
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+</merge>

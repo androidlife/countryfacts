@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CountryFacts</string>
+    <string name="info_tap_to_retry">Tap To Retry !</string>
 </resources>
