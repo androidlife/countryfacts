@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,14 +46,21 @@ public class RowView extends ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.row_view, this, true);
         ButterKnife.bind(this);
 
+        int imgWidth = getResources().getDimensionPixelSize(R.dimen.img_width);
+        int imgHeight = getResources().getDimensionPixelSize(R.dimen.img_height);
+
         imageLoadOptions = new ImageLoadOptions.Builder().setErrorDrawable(R.drawable.ic_placeholder_error)
                 .setPlaceHolder(R.drawable.ic_placeholder)
+                .setResizeWidthHeight(imgWidth, imgHeight)
                 .build();
     }
 
     public void setData(CountryInfo countryInfo) {
         tvTitle.setText(countryInfo.title);
         tvDescription.setText(countryInfo.description);
-        ImageLoader.loadImage(countryInfo.imageHref, imageView, imageLoadOptions);
+        if (URLUtil.isValidUrl(countryInfo.imageHref))
+            ImageLoader.loadImage(countryInfo.imageHref, imageView, imageLoadOptions);
+        else
+            imageView.setImageResource(R.drawable.ic_placeholder_error);
     }
 }

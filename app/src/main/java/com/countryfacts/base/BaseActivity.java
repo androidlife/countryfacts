@@ -23,9 +23,9 @@ import java.util.List;
 
 public abstract class BaseActivity extends Activity {
 
-    protected abstract void onCreate();
+    protected abstract void onPermissionChecked();
 
-    protected abstract int getLayoutId();
+    protected abstract void onCreated(Bundle savedInstanceState);
 
     private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int RETURN_FROM_PERMISSIONS = 0x1;
@@ -33,6 +33,7 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreated(savedInstanceState);
         checkPermissions();
     }
 
@@ -44,7 +45,7 @@ public abstract class BaseActivity extends Activity {
                 permissionList.add(permission);
         }
         if (permissionList.size() == 0) {
-            create();
+            onPermissionChecked();
             return;
         }
         ActivityCompat.requestPermissions(this,
@@ -54,11 +55,8 @@ public abstract class BaseActivity extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //if (ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED)
-        create();
+        onPermissionChecked();
     }
 
-    private void create() {
-        setContentView(getLayoutId());
-        onCreate();
-    }
+
 }

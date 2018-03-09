@@ -9,12 +9,14 @@ import android.view.View;
  */
 
 public class RowItemSpace extends RecyclerView.ItemDecoration {
-    int itemSpace;
-    int startEndSpace;
 
-    public RowItemSpace(int itemSpace, int startEndSpace) {
-        this.itemSpace = itemSpace;
-        this.startEndSpace = startEndSpace;
+    int left, top, right, bottom;
+
+    public RowItemSpace(int left, int top, int right, int bottom) {
+        this.left = left;
+        this.top = top;
+        this.right = right;
+        this.bottom = bottom;
     }
 
     @Override
@@ -23,11 +25,9 @@ public class RowItemSpace extends RecyclerView.ItemDecoration {
         if (position == RecyclerView.NO_POSITION)
             return;
         if (position == parent.getAdapter().getItemCount() - 1) {
-            outRect.set(itemSpace, 0, startEndSpace, 0);
-        } else if (position == 0) {
-            outRect.set(startEndSpace, 0, 0, 0);
+            outRect.set(left, top, right, bottom);
         } else {
-            outRect.set(itemSpace, 0, 0, 0);
+            outRect.set(left, top, right, 0);
         }
 
     }

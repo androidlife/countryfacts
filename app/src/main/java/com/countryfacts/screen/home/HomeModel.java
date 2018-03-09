@@ -37,7 +37,8 @@ public class HomeModel implements HomeInteraction.Model {
     @Override
     public void cancel(boolean cancel) {
         this.isCancelled = cancel;
-        unsubscribeRemoteCallback();
+        if (cancel)
+            unsubscribeRemoteCallback();
     }
 
     private void unsubscribeRemoteCallback() {

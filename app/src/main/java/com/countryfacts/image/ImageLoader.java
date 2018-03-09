@@ -1,5 +1,6 @@
 package com.countryfacts.image;
 
+import android.app.Activity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,7 +16,12 @@ public class ImageLoader {
     public static void loadImage(String url, ImageView imageView,
                                  ImageLoadOptions imageLoadOptions) {
         applyRequestOptions(imageLoadOptions);
-        Glide.with(imageView).load(url).apply(requestOptions).into(imageView);
+        //the reason we are casting to activity is that
+        //we are targeting for Android 7 and above and using
+        //no support fragment
+        //glide checks whether the context is of fragment or not
+        //to avoid this we are casting to activity directly
+        Glide.with((Activity) imageView.getContext()).load(url).apply(requestOptions).into(imageView);
     }
 
     // since there is only image items in recycler view or only one type of image item
@@ -26,6 +32,7 @@ public class ImageLoader {
             requestOptions = new RequestOptions().error(imageLoadOptions.errorDrawableId)
                     .placeholder(imageLoadOptions.placeHolderDrawableId)
                     .override(imageLoadOptions.resizeWidth, imageLoadOptions.resizeHeight)
+                    .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
         }
     }

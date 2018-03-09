@@ -2,5 +2,9 @@
 <resources>
     <dimen name="row_padding">14dp</dimen>
     <dimen name="row_space_top">10dp</dimen>
-    <dimen name="row_space_bottom">10dp</dimen>
+    <dimen name="row_space_bottom">12dp</dimen>
+    <dimen name="row_space_left">10dp</dimen>
+    <dimen name="row_space_right">10dp</dimen>
+    <dimen name="img_width">96dp</dimen>
+    <dimen name="img_height">72dp</dimen>
 </resources>
