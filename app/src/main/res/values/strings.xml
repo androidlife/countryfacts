@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">CountryFacts</string>
-    <string name="info_tap_to_retry">Tap To Retry !</string>
-
-    <string name="error_network">Network Unavailable</string>
-    <string name="error_fetch">Unable to fetch data</string>
-</resources>
