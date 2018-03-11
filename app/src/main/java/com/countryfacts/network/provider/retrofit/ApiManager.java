@@ -1,7 +1,11 @@
 package com.countryfacts.network.provider.retrofit;
 
 import com.countryfacts.BuildConfig;
+import com.countryfacts.model.Country;
+import com.countryfacts.model.deserializer.CountryDeserializer;
 import com.countryfacts.network.Urls;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,10 +36,13 @@ public class ApiManager {
                     if (BuildConfig.DEBUG)
                         okhttpClientBuilder.addInterceptor(getLoggingInterceptor(HttpLoggingInterceptor.Level.BASIC));
                     //TODO add a custom converter to ignore null values
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.registerTypeAdapter(Country.class, new CountryDeserializer());
+
                     retrofit = new Retrofit.Builder()
                             .baseUrl(Urls.BASE)
                             .client(okhttpClientBuilder.build())
-                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
                 }

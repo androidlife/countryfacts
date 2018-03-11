@@ -13,7 +13,8 @@ public interface HomeInteraction {
     interface Controller {
         ActionBar getActionBar();
 
-        void onReload();
+        void onRetry();
+        void onRefresh();
     }
 
     interface View {
@@ -30,7 +31,9 @@ public interface HomeInteraction {
 
         void setState(int state);
 
-        int STATE_ERROR = 0x1, STATE_EMPTY = 0x2, STATE_LOADING = 0x3;
+        void scrollToTop();
+
+        int STATE_ERROR = 0x1, STATE_EMPTY = 0x2, STATE_LOADING = 0x3, STATE_LOADED = 0x4;
     }
 
     interface Model {

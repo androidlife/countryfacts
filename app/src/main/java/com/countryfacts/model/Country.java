@@ -12,9 +12,7 @@ import java.util.List;
  */
 
 public class Country implements Parcelable {
-    @SerializedName("title")
     public String name;
-    @SerializedName("rows")
     public List<CountryInfo> countryInfos = null;
 
     public Country() {

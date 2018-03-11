@@ -29,12 +29,25 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
         homeView = new HomeView(findViewById(R.id.swipe_ref_layout), this);
 
         homeModel = new HomeModel();
-        if (isCountryValid()) {
-            onDataFetched(country);
-            return;
-        }
+        setViewState();
+    }
+
+    private void setViewState() {
         setViewState(viewState);
-        fetchData();
+        if (isCountryValid()) {
+            if (viewState == HomeInteraction.View.STATE_LOADING) {
+                homeView.showData(country);
+                fetchNewData();
+            } else
+                onDataFetched(country);
+        } else {
+            if (viewState == HomeInteraction.View.STATE_ERROR)
+                homeView.showError(true);
+            else
+                fetchNewData();
+
+        }
+
     }
 
     private void setViewState(int state) {
@@ -78,22 +91,46 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
         return country != null && country.isValid();
     }
 
-    private void fetchData() {
+    private void fetchNewData() {
         homeView.showProgress(true);
+        homeView.showError(false);
+        fetchData();
+    }
+
+    private void fetchData() {
+
         homeModel.fetchCountryInfo(new HomeInteraction.CountryInfoFetchListener() {
             @Override
             public void onSuccess(Country country) {
                 Timber.d("Country fetched = %s", country.name);
-                onDataFetched(country);
+                //TODO check whether the fetched data is valid
+                boolean isValid = country != null && country.isValid();
+                if (isValid) {
+                    onDataFetched(country);
+                    if (homeView.getState() == HomeInteraction.View.STATE_LOADING) {
+                        homeView.scrollToTop();
+                    }
+                    homeView.setState(HomeInteraction.View.STATE_LOADED);
+                } else {
+                    onError(new Error(Error.Type.Fetch));
+                }
+
+
             }
 
             @Override
             public void onError(Error error) {
                 Timber.e("Error fetching country info");
-                //TODO check proper state
-                homeView.showInfo(getErrorMessage(error));
-                homeView.showProgress(false);
-                homeView.showError(true);
+                if (isCountryValid()) {
+                    homeView.showProgress(false);
+                    homeView.setState(HomeInteraction.View.STATE_LOADED);
+                    homeView.showInfo(getString(R.string.error_fetch));
+                } else {
+                    homeView.showInfo(getErrorMessage(error));
+                    homeView.showProgress(false);
+                    homeView.showError(true);
+                    homeView.setState(HomeInteraction.View.STATE_ERROR);
+                }
             }
         });
     }
@@ -105,10 +142,16 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
     }
 
     @Override
-    public void onReload() {
-        fetchData();
+    public void onRetry() {
+        homeView.setState(HomeInteraction.View.STATE_LOADING);
+        fetchNewData();
     }
 
+    @Override
+    public void onRefresh() {
+        homeView.setState(HomeInteraction.View.STATE_LOADING);
+        fetchData();
+    }
 
 
     private String getErrorMessage(Error error) {

@@ -53,6 +53,9 @@ public class HomeView implements HomeInteraction.View {
         int bottom = resources.getDimensionPixelSize(R.dimen.row_space_bottom);
         RowItemSpace rowItemSpace = new RowItemSpace(left, top, right, bottom);
         recyclerView.addItemDecoration(rowItemSpace);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            controller.onRefresh();
+        });
 
     }
 
@@ -77,7 +80,7 @@ public class HomeView implements HomeInteraction.View {
 
     @OnClick({R.id.tv_error})
     public void onClick(View view) {
-        controller.onReload();
+        controller.onRetry();
     }
 
     @Override
@@ -102,5 +105,10 @@ public class HomeView implements HomeInteraction.View {
     @Override
     public void setState(int state) {
         viewState = state;
+    }
+
+    @Override
+    public void scrollToTop() {
+        recyclerView.smoothScrollToPosition(0);
     }
 }

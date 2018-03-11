@@ -2,6 +2,7 @@ package com.countryfacts.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,16 +10,18 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class CountryInfo implements Parcelable {
-    @SerializedName("title")
     public String title;
-    @SerializedName("description")
     public String description;
-    @SerializedName("imageHref")
     public String imageHref;
 
 
     public CountryInfo() {
 
+    }
+
+    public boolean isDataEmpty() {
+        return TextUtils.isEmpty(title) && TextUtils.isEmpty(description)
+                && TextUtils.isEmpty(imageHref);
     }
 
     protected CountryInfo(Parcel in) {
