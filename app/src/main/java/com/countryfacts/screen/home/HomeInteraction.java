@@ -1,12 +1,12 @@
 package com.countryfacts.screen.home;
 
 import android.app.ActionBar;
-import android.widget.Toolbar;
 
 import com.countryfacts.model.Country;
 import com.countryfacts.model.Error;
 
 /**
+ * All the related MVC interface interaction
  */
 
 public interface HomeInteraction {

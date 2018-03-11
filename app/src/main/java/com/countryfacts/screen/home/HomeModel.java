@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
+ * Our model part which is responsible for fetching the data from API
  */
 
 public class HomeModel implements HomeInteraction.Model {

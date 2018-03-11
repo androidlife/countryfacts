@@ -31,7 +31,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class DataPresentTest {
+public class DataFetchSuccessTest {
     @Rule
     public ActivityTestRule<HomeActivity> homeActivityActivityTestRule =
             new ActivityTestRule<>(HomeActivity.class);
@@ -56,7 +56,8 @@ public class DataPresentTest {
     }
 
     @Test
-    public void dataFetchTest() {
+    public void dataFetchSuccess() {
+        //this is for first install or when user hasn't given any permission for sdcard access
         UiDevice uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         UiObject allowPermissions = uiDevice.findObject(new UiSelector().text("ALLOW"));
         if (allowPermissions.exists()) {
@@ -66,6 +67,8 @@ public class DataPresentTest {
                 e.printStackTrace();
             }
         }
+        //since it may take some time to fetch data from server
+        //we are waiting for some time to get response and populate on our view
         IdlingRegistry.getInstance().register(idlingResource);
         idlingResource.startCountdown(TIMEOUT_FETCH, TIMEOUT_UNIT);
         onView(withId(R.id.rv_info)).check(matches(isDisplayed()));

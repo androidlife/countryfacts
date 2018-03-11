@@ -14,8 +14,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
+ * Our Network service provider
  */
 
 public class ApiManager {
@@ -35,10 +37,8 @@ public class ApiManager {
                     okhttpClientBuilder.readTimeout(1, TimeUnit.MINUTES);
                     if (BuildConfig.DEBUG)
                         okhttpClientBuilder.addInterceptor(getLoggingInterceptor(HttpLoggingInterceptor.Level.BASIC));
-                    //TODO add a custom converter to ignore null values
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.registerTypeAdapter(Country.class, new CountryDeserializer());
-
                     retrofit = new Retrofit.Builder()
                             .baseUrl(Urls.BASE)
                             .client(okhttpClientBuilder.build())

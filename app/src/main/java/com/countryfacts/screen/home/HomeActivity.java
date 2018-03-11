@@ -1,15 +1,12 @@
 package com.countryfacts.screen.home;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.countryfacts.R;
 import com.countryfacts.base.BaseActivity;
 import com.countryfacts.model.Country;
 import com.countryfacts.model.Error;
 
-import butterknife.OnClick;
 import timber.log.Timber;
 
 public class HomeActivity extends BaseActivity implements HomeInteraction.Controller {
@@ -27,10 +24,10 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
     protected void onPermissionChecked() {
         setContentView(R.layout.activity_home);
         homeView = new HomeView(findViewById(R.id.swipe_ref_layout), this);
-        setViewState();
+        init();
     }
 
-    private void setViewState() {
+    private void init() {
         setViewState(viewState);
         if (isCountryValid()) {
             if (viewState == HomeInteraction.View.STATE_LOADING) {
@@ -45,7 +42,6 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
                 fetchNewData();
 
         }
-
     }
 
     private void setViewState(int state) {
@@ -102,7 +98,6 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
             @Override
             public void onSuccess(Country country) {
                 Timber.d("Country fetched = %s", country.name);
-                //TODO check whether the fetched data is valid
                 boolean isValid = country != null && country.isValid();
                 if (isValid) {
                     onDataFetched(country);
