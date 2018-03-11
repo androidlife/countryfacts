@@ -27,8 +27,6 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
     protected void onPermissionChecked() {
         setContentView(R.layout.activity_home);
         homeView = new HomeView(findViewById(R.id.swipe_ref_layout), this);
-
-        homeModel = new HomeModel();
         setViewState();
     }
 
@@ -78,6 +76,7 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
 
     @Override
     protected void onCreated(Bundle savedInstanceState) {
+        homeModel = new HomeModel();
         if (savedInstanceState == null)
             return;
         if (savedInstanceState.containsKey(DATA_COUNTRY))
