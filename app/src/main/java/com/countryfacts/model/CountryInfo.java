@@ -2,7 +2,6 @@ package com.countryfacts.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
 
 /**
  */
@@ -18,8 +17,12 @@ public class CountryInfo implements Parcelable {
     }
 
     public boolean isDataEmpty() {
-        return TextUtils.isEmpty(title) && TextUtils.isEmpty(description)
-                && TextUtils.isEmpty(imageHref);
+        return isEmpty(title) && isEmpty(description)
+                && isEmpty(imageHref);
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.trim().length() == 0;
     }
 
     protected CountryInfo(Parcel in) {

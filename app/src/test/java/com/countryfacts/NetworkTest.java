@@ -23,7 +23,6 @@ public class NetworkTest {
     public void fetchJsonData() throws Exception {
         Country country = ApiManager.getApiService().getCountryInfo().blockingFirst();
         assertTrue(country.name != null);
-        assertTrue(country.countryInfos !=null && country.countryInfos.size()>0);
-        assertTrue(country.countryInfos.size()==14);
+        assertTrue(country.countryInfos != null && country.countryInfos.size() > 0);
     }
 }
