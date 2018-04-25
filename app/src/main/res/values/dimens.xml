@@ -7,4 +7,5 @@
     <dimen name="row_space_right">10dp</dimen>
     <dimen name="img_width">96dp</dimen>
     <dimen name="img_height">72dp</dimen>
+    <dimen name="row_margin_top">10dp</dimen>
 </resources>

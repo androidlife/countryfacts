@@ -23,7 +23,7 @@ public class RowViewHolder extends RecyclerView.ViewHolder {
     TextView tvTitle;
     @BindView(R.id.tv_description)
     TextView tvDescription;
-    @BindView(R.id.img_view)
+    @BindView(R.id.iv_fact)
     ImageView imageView;
 
     private ImageLoadOptions imageLoadOptions;
