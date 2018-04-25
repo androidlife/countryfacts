@@ -9,14 +9,17 @@ import com.countryfacts.model.Error;
  * All the related MVC interface interaction
  */
 
-public interface HomeInteraction {
+public interface HomeContracts {
+    //this will be implemented by our Activity
     interface Controller {
         ActionBar getActionBar();
 
         void onRetry();
+
         void onRefresh();
     }
 
+    //this will be implemented by our ViewGroup
     interface View {
 
         void showError(boolean show);
@@ -25,7 +28,7 @@ public interface HomeInteraction {
 
         void showInfo(String info);
 
-        void showData(Country country);
+        void populateList(Country country);
 
         int getState();
 
@@ -36,6 +39,7 @@ public interface HomeInteraction {
         int STATE_ERROR = 0x1, STATE_EMPTY = 0x2, STATE_LOADING = 0x3, STATE_LOADED = 0x4;
     }
 
+    //this will be implemented by our Model layer
     interface Model {
         void fetchCountryInfo(CountryInfoFetchListener infoFetchListener);
 

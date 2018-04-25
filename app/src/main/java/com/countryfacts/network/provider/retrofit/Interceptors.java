@@ -3,6 +3,7 @@ package com.countryfacts.network.provider.retrofit;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
+ * All the http interceptors are accessed from this class
  */
 
 public class Interceptors {

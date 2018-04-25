@@ -9,17 +9,24 @@ import com.countryfacts.model.Error;
 
 import timber.log.Timber;
 
-public class HomeActivity extends BaseActivity implements HomeInteraction.Controller {
+/**
+ * Here MVC architecture is follower, where
+ * Activity acts as a controller and mediator
+ * between the View and the Model layouer
+ */
+public class HomeActivity extends BaseActivity implements HomeContracts.Controller {
 
 
     private HomeView homeView;
     private HomeModel homeModel;
     private Country country;
 
-    private static final String DATA_COUNTRY = "Country";
-    private static final String VIEW_STATE = "ViewState";
+    //key for saving Country and View State
+    private static final String SAVE_COUNTRY = "Country";
+    private static final String SAVE_VIEW_STATE = "ViewState";
     private int viewState = HomeView.STATE_EMPTY;
 
+    //callback after necessary permission is given
     @Override
     protected void onPermissionChecked() {
         setContentView(R.layout.activity_home);
@@ -27,16 +34,17 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
         init();
     }
 
+    //initializing the view and requesting model layer is necessary
     private void init() {
         setViewState(viewState);
         if (isCountryValid()) {
-            if (viewState == HomeInteraction.View.STATE_LOADING) {
-                homeView.showData(country);
+            if (viewState == HomeContracts.View.STATE_LOADING) {
+                homeView.populateList(country);
                 fetchNewData();
             } else
                 onDataFetched(country);
         } else {
-            if (viewState == HomeInteraction.View.STATE_ERROR)
+            if (viewState == HomeContracts.View.STATE_ERROR)
                 homeView.showError(true);
             else
                 fetchNewData();
@@ -44,10 +52,12 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
         }
     }
 
+    //setting the view state
     private void setViewState(int state) {
         homeView.setState(state);
     }
 
+    //pausing and resuming the model layer
     @Override
     protected void onPause() {
         super.onPause();
@@ -61,24 +71,26 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
     }
 
 
+    //saving the view state along with data
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (isCountryValid())
-            outState.putParcelable(DATA_COUNTRY, country);
-        outState.putInt(VIEW_STATE, homeView.getState());
+            outState.putParcelable(SAVE_COUNTRY, country);
+        outState.putInt(SAVE_VIEW_STATE, homeView.getState());
 
     }
 
+    //resorting the view state along with data if present
     @Override
     protected void onCreated(Bundle savedInstanceState) {
         homeModel = new HomeModel();
         if (savedInstanceState == null)
             return;
-        if (savedInstanceState.containsKey(DATA_COUNTRY))
-            country = savedInstanceState.getParcelable(DATA_COUNTRY);
-        if (savedInstanceState.containsKey(VIEW_STATE))
-            viewState = savedInstanceState.getInt(VIEW_STATE);
+        if (savedInstanceState.containsKey(SAVE_COUNTRY))
+            country = savedInstanceState.getParcelable(SAVE_COUNTRY);
+        if (savedInstanceState.containsKey(SAVE_VIEW_STATE))
+            viewState = savedInstanceState.getInt(SAVE_VIEW_STATE);
 
     }
 
@@ -86,25 +98,26 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
         return country != null && country.isValid();
     }
 
+    //fetching the entire new data where there is slight change in view only
     private void fetchNewData() {
         homeView.showProgress(true);
         homeView.showError(false);
         fetchData();
     }
 
+    //fetching the data from model layer
     private void fetchData() {
-
-        homeModel.fetchCountryInfo(new HomeInteraction.CountryInfoFetchListener() {
+        homeModel.fetchCountryInfo(new HomeContracts.CountryInfoFetchListener() {
             @Override
             public void onSuccess(Country country) {
                 Timber.d("Country fetched = %s", country.name);
                 boolean isValid = country != null && country.isValid();
                 if (isValid) {
                     onDataFetched(country);
-                    if (homeView.getState() == HomeInteraction.View.STATE_LOADING) {
+                    if (homeView.getState() == HomeContracts.View.STATE_LOADING) {
                         homeView.scrollToTop();
                     }
-                    homeView.setState(HomeInteraction.View.STATE_LOADED);
+                    homeView.setState(HomeContracts.View.STATE_LOADED);
                 } else {
                     onError(new Error(Error.Type.Fetch));
                 }
@@ -117,13 +130,13 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
                 Timber.e("Error fetching country info");
                 if (isCountryValid()) {
                     homeView.showProgress(false);
-                    homeView.setState(HomeInteraction.View.STATE_LOADED);
+                    homeView.setState(HomeContracts.View.STATE_LOADED);
                     homeView.showInfo(getString(R.string.error_fetch));
                 } else {
                     homeView.showInfo(getErrorMessage(error));
                     homeView.showProgress(false);
                     homeView.showError(true);
-                    homeView.setState(HomeInteraction.View.STATE_ERROR);
+                    homeView.setState(HomeContracts.View.STATE_ERROR);
                 }
             }
         });
@@ -132,22 +145,24 @@ public class HomeActivity extends BaseActivity implements HomeInteraction.Contro
     private void onDataFetched(Country country) {
         this.country = country;
         homeView.showProgress(false);
-        homeView.showData(country);
+        homeView.populateList(country);
     }
 
+    //retry in case of any error like network
     @Override
     public void onRetry() {
-        homeView.setState(HomeInteraction.View.STATE_LOADING);
+        homeView.setState(HomeContracts.View.STATE_LOADING);
         fetchNewData();
     }
 
+    //refresh action
     @Override
     public void onRefresh() {
-        homeView.setState(HomeInteraction.View.STATE_LOADING);
+        homeView.setState(HomeContracts.View.STATE_LOADING);
         fetchData();
     }
 
-
+    //simple method to get the error message as per error type
     private String getErrorMessage(Error error) {
         switch (error.type) {
             case Network:

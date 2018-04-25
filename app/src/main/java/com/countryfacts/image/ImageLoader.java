@@ -8,6 +8,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 /**
+ * This is a ImageLoader class for loading images into ImageView
+ * Right now we are using Glide as our ImageLoading Library
+ * Only this class needs to be changed, if we use another image loading
+ * library
  */
 
 public class ImageLoader {

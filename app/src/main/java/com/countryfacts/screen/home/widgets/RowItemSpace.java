@@ -6,6 +6,8 @@ import android.view.View;
 
 
 /**
+ * A simple class to add space between successive
+ * rows of recycler view
  */
 
 public class RowItemSpace extends RecyclerView.ItemDecoration {

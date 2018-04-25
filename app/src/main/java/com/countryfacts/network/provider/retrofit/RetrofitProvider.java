@@ -14,6 +14,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * A simple way to get Retrofit instance
  */
 
 public class RetrofitProvider {

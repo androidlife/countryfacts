@@ -15,6 +15,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * Single Item View of the recycler view
+ * Here we simply populate the R.layout.row_view children
+ * with appropriate data class i.e. CountryInfo
  */
 
 public class RowViewHolder extends RecyclerView.ViewHolder {

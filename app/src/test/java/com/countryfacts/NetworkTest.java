@@ -10,9 +10,10 @@ import org.junit.rules.Timeout;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Simple test to see whether network callback
+ * and json parsing is done properly or not
+ * This is just a brute force mechanism of testing the network
+ * where we assume that there is always a fetch success
  */
 public class NetworkTest {
 

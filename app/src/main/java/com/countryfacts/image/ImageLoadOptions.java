@@ -3,6 +3,9 @@ package com.countryfacts.image;
 import com.countryfacts.R;
 
 /**
+ * Various Image Loading options like
+ * place holder image, error holder images
+ * along with image resize width and height
  */
 
 public class ImageLoadOptions {

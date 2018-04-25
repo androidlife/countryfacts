@@ -11,6 +11,7 @@ import com.countryfacts.model.CountryInfo;
 import java.util.List;
 
 /**
+ * Our RecyclerView Adapter class
  */
 
 public class HomeAdapter extends RecyclerView.Adapter<RowViewHolder> {

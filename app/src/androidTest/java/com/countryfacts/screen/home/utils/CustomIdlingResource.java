@@ -8,6 +8,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import io.reactivex.Observable;
 
 /**
+ * An IdlingResource, which will be idle after the given time is elapsed
+ * Specially needed to check for network timeout as any network call
+ * requires some time. So this IdlingResource is to be used, if our test
+ * contains networking fetching tasks
  */
 
 public class CustomIdlingResource implements IdlingResource {
@@ -36,7 +40,7 @@ public class CustomIdlingResource implements IdlingResource {
         if (callback != null)
             callback.onTransitionToIdle();
     }
-
+    //method to
     public void startCountdown(long countDown, TimeUnit timeUnit) {
         Observable.timer(countDown, timeUnit).subscribe(l -> setIdle());
     }

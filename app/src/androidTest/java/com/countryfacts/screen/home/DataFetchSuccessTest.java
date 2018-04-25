@@ -28,6 +28,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
+ * Test to validate that we are getting success result
+ * from the server and our list is populated from the fetched
+ * data
  */
 
 @RunWith(AndroidJUnit4.class)

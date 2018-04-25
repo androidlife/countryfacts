@@ -19,9 +19,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * View separation layer implementing View contracts
  */
 
-public class HomeView implements HomeInteraction.View {
+public class HomeView implements HomeContracts.View {
 
 
     @BindView(R.id.swipe_ref_layout)
@@ -32,15 +33,15 @@ public class HomeView implements HomeInteraction.View {
     TextView tvError;
 
     private int viewState;
-    private HomeInteraction.Controller controller;
+    private HomeContracts.Controller controller;
     private HomeAdapter homeAdapter;
 
-    public HomeView(View view, HomeInteraction.Controller controller) {
+    public HomeView(View view, HomeContracts.Controller controller) {
         ButterKnife.bind(this, view);
         this.controller = controller;
         initViews(view.getContext());
     }
-
+     //initializing the view based upon R.layout.activity_home
     private void initViews(Context context) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -77,7 +78,7 @@ public class HomeView implements HomeInteraction.View {
     }
 
     @OnClick({R.id.tv_error})
-    public void onClick(View view) {
+    public void onClick() {
         controller.onRetry();
     }
 
@@ -87,7 +88,7 @@ public class HomeView implements HomeInteraction.View {
     }
 
     @Override
-    public void showData(Country country) {
+    public void populateList(Country country) {
         controller.getActionBar().setTitle(country.name);
         recyclerView.setVisibility(View.VISIBLE);
         homeAdapter = new HomeAdapter(country.countryInfos);

@@ -29,6 +29,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
+ * Test to validate whether our view is working
+ * in case of any fetch error
  */
 @RunWith(AndroidJUnit4.class)
 public class DataFetchFailureTest {

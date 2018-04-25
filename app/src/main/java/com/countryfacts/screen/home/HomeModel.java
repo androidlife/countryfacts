@@ -14,13 +14,13 @@ import timber.log.Timber;
  * Our model part which is responsible for fetching the data from API
  */
 
-public class HomeModel implements HomeInteraction.Model {
+public class HomeModel implements HomeContracts.Model {
 
     private boolean isCancelled;
     private Disposable callback;
 
     @Override
-    public void fetchCountryInfo(HomeInteraction.CountryInfoFetchListener infoFetchListener) {
+    public void fetchCountryInfo(HomeContracts.CountryInfoFetchListener infoFetchListener) {
         if (!GeneralUtil.isConnectedToNetwork()) {
             onFailure(new Error(Error.Type.Network), infoFetchListener);
             return;
@@ -49,14 +49,14 @@ public class HomeModel implements HomeInteraction.Model {
         }
     }
 
-    private void onSuccess(Country country, HomeInteraction.CountryInfoFetchListener infoFetchListener) {
+    private void onSuccess(Country country, HomeContracts.CountryInfoFetchListener infoFetchListener) {
         Timber.d("Successfully fetched country info");
         if (infoFetchListener == null || isCancelled)
             return;
         infoFetchListener.onSuccess(country);
     }
 
-    private void onFailure(Error error, HomeInteraction.CountryInfoFetchListener infoFetchListener) {
+    private void onFailure(Error error, HomeContracts.CountryInfoFetchListener infoFetchListener) {
         if (infoFetchListener == null || isCancelled)
             return;
         infoFetchListener.onError(error);
