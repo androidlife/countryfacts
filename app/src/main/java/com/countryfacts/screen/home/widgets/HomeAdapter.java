@@ -1,8 +1,11 @@
 package com.countryfacts.screen.home.widgets;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.countryfacts.R;
 import com.countryfacts.model.CountryInfo;
 
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
 /**
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.RowViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<RowView> {
 
 
     private List<CountryInfo> countryInfos;
@@ -20,17 +23,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.RowViewHolder>
     }
 
     @Override
-    public RowViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RowView rowView = new RowView(parent.getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        rowView.setLayoutParams(layoutParams);
-        return new RowViewHolder(rowView);
+    public RowView onCreateViewHolder(ViewGroup parent, int viewType) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.row_view, parent, false);
+        return new RowView(view);
     }
 
     @Override
-    public void onBindViewHolder(RowViewHolder holder, int position) {
-        holder.rowView.setData(getItemAt(position));
+    public void onBindViewHolder(RowView holder, int position) {
+        holder.setData(getItemAt(position));
     }
 
     @Override
@@ -42,13 +43,5 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.RowViewHolder>
         return countryInfos.get(position);
     }
 
-    static class RowViewHolder extends RecyclerView.ViewHolder {
 
-        RowView rowView;
-
-        public RowViewHolder(RowView rowView) {
-            super(rowView);
-            this.rowView = rowView;
-        }
-    }
 }

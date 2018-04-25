@@ -1,9 +1,7 @@
 package com.countryfacts.screen.home.widgets;
 
-import android.content.Context;
-import android.support.constraint.ConstraintLayout;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  */
 
-public class RowView extends ConstraintLayout {
+public class RowView extends RecyclerView.ViewHolder {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -30,25 +28,12 @@ public class RowView extends ConstraintLayout {
 
     ImageLoadOptions imageLoadOptions;
 
-    public RowView(Context context) {
-        this(context, null);
-    }
 
-    public RowView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public RowView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        setBackgroundResource(R.drawable.row_view_bg);
-        int padding = getResources().getDimensionPixelSize(R.dimen.row_padding);
-        setPadding(padding, padding, padding, padding);
-        LayoutInflater.from(context).inflate(R.layout.row_view, this, true);
-        ButterKnife.bind(this);
-
-        int imgWidth = getResources().getDimensionPixelSize(R.dimen.img_width);
-        int imgHeight = getResources().getDimensionPixelSize(R.dimen.img_height);
-
+    public RowView(View view) {
+        super(view);
+        ButterKnife.bind(this, view);
+        int imgWidth = view.getResources().getDimensionPixelSize(R.dimen.img_width);
+        int imgHeight = view.getResources().getDimensionPixelSize(R.dimen.img_height);
         imageLoadOptions = new ImageLoadOptions.Builder().setErrorDrawable(R.drawable.ic_placeholder_error)
                 .setPlaceHolder(R.drawable.ic_placeholder)
                 .setResizeWidthHeight(imgWidth, imgHeight)
