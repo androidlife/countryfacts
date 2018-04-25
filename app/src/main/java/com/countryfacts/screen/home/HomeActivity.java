@@ -12,7 +12,7 @@ import timber.log.Timber;
 /**
  * Here MVC architecture is follower, where
  * Activity acts as a controller and mediator
- * between the View and the Model layouer
+ * between the View and the Model layer
  */
 public class HomeActivity extends BaseActivity implements HomeContracts.Controller {
 
@@ -110,7 +110,6 @@ public class HomeActivity extends BaseActivity implements HomeContracts.Controll
         homeModel.fetchCountryInfo(new HomeContracts.CountryInfoFetchListener() {
             @Override
             public void onSuccess(Country country) {
-                Timber.d("Country fetched = %s", country.name);
                 boolean isValid = country != null && country.isValid();
                 if (isValid) {
                     onDataFetched(country);

@@ -33,7 +33,7 @@ public class HomeView implements HomeContracts.View {
     TextView tvError;
 
     private int viewState;
-    private HomeContracts.Controller controller;
+    private final HomeContracts.Controller controller;
     private HomeAdapter homeAdapter;
 
     public HomeView(View view, HomeContracts.Controller controller) {
@@ -91,7 +91,7 @@ public class HomeView implements HomeContracts.View {
     public void populateList(Country country) {
         controller.getActionBar().setTitle(country.name);
         recyclerView.setVisibility(View.VISIBLE);
-        homeAdapter = new HomeAdapter(country.countryInfos);
+        homeAdapter = new HomeAdapter(country.countryInfoList);
         recyclerView.setAdapter(homeAdapter);
 
     }

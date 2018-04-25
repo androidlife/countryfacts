@@ -17,10 +17,10 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<RowViewHolder> {
 
 
-    private final List<CountryInfo> countryInfos;
+    private final List<CountryInfo> countryInfoList;
 
-    public HomeAdapter(List<CountryInfo> countryInfos) {
-        this.countryInfos = countryInfos;
+    public HomeAdapter(List<CountryInfo> countryInfoList) {
+        this.countryInfoList = countryInfoList;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RowViewHolder> {
 
     @Override
     public int getItemCount() {
-        return countryInfos.size();
+        return countryInfoList.size();
     }
 
     private CountryInfo getItemAt(int position) {
-        return countryInfos.get(position);
+        return countryInfoList.get(position);
     }
 
 

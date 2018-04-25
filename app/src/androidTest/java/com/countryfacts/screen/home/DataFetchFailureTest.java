@@ -64,7 +64,7 @@ public class DataFetchFailureTest {
 
     @Test
     public void dataFetchFailure() {
-        //for mockserver to properly work we won't launch the activity
+        //for mockServer to properly work we won't launch the activity
         // on the fly, but create an intent to launch by ourselves
         Intent intent = new Intent();
         homeActivityActivityTestRule.launchActivity(intent);

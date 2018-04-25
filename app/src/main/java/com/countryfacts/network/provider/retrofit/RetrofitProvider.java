@@ -28,16 +28,16 @@ public class RetrofitProvider {
         if (retrofit == null) {
             synchronized (RetrofitProvider.class) {
                 if (retrofit == null) {
-                    OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
-                    okhttpClientBuilder.connectTimeout(1, TimeUnit.MINUTES);
-                    okhttpClientBuilder.readTimeout(1, TimeUnit.MINUTES);
+                    OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
+                    okHttpClientBuilder.connectTimeout(1, TimeUnit.MINUTES);
+                    okHttpClientBuilder.readTimeout(1, TimeUnit.MINUTES);
                     if (BuildConfig.DEBUG)
-                        okhttpClientBuilder.addInterceptor(Interceptors.getBasicLoggingInterceptor());
+                        okHttpClientBuilder.addInterceptor(Interceptors.getBasicLoggingInterceptor());
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.registerTypeAdapter(Country.class, new CountryDeserializer());
                     retrofit = new Retrofit.Builder()
                             .baseUrl(Urls.BASE)
-                            .client(okhttpClientBuilder.build())
+                            .client(okHttpClientBuilder.build())
                             .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();

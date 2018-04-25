@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Country implements Parcelable {
     public String name;
-    public List<CountryInfo> countryInfos = null;
+    public List<CountryInfo> countryInfoList = null;
 
     public Country() {
 
@@ -18,7 +18,7 @@ public class Country implements Parcelable {
 
     protected Country(Parcel in) {
         name = in.readString();
-        countryInfos = in.createTypedArrayList(CountryInfo.CREATOR);
+        countryInfoList = in.createTypedArrayList(CountryInfo.CREATOR);
     }
 
     public static final Creator<Country> CREATOR = new Creator<Country>() {
@@ -45,6 +45,6 @@ public class Country implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeTypedList(countryInfos);
+        dest.writeTypedList(countryInfoList);
     }
 }

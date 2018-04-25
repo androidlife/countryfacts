@@ -25,7 +25,7 @@ public class CountryDeserializer implements JsonDeserializer<Country> {
         final JsonElement mainTitleElement = jsonObject.get("title");
         if (!mainTitleElement.isJsonNull())
             country.name = jsonObject.get("title").getAsString();
-        country.countryInfos = new ArrayList<>();
+        country.countryInfoList = new ArrayList<>();
         final JsonArray jsonArray = jsonObject.getAsJsonArray("rows");
 
         if (jsonArray != null) {
@@ -42,7 +42,7 @@ public class CountryDeserializer implements JsonDeserializer<Country> {
                 if (!imgElement.isJsonNull())
                     countryInfo.imageHref = imgElement.getAsString();
                 if (!isDataEmpty(countryInfo))
-                    country.countryInfos.add(countryInfo);
+                    country.countryInfoList.add(countryInfo);
             }
         }
         return country;

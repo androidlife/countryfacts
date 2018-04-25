@@ -25,7 +25,7 @@ public class HomeModel implements HomeContracts.Model {
             onFailure(new Error(Error.Type.Network), infoFetchListener);
             return;
         }
-        unsubscribeRemoteCallback();
+        unSubscribeRemoteCallback();
         callback = ApiManager.getApiService().getCountryInfo().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(c -> onSuccess(c, infoFetchListener),
@@ -39,10 +39,10 @@ public class HomeModel implements HomeContracts.Model {
     public void cancel(boolean cancel) {
         this.isCancelled = cancel;
         if (cancel)
-            unsubscribeRemoteCallback();
+            unSubscribeRemoteCallback();
     }
 
-    private void unsubscribeRemoteCallback() {
+    private void unSubscribeRemoteCallback() {
         if (callback != null) {
             callback.dispose();
             callback = null;

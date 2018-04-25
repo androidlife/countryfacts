@@ -3,7 +3,7 @@ package com.countryfacts.model;
 /**
  */
 
-public class Error extends java.lang.Error {
+public class Error {
 
     public final Type type;
 
