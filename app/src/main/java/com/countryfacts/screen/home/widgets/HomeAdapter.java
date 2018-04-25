@@ -13,7 +13,7 @@ import java.util.List;
 /**
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<RowView> {
+public class HomeAdapter extends RecyclerView.Adapter<RowViewHolder> {
 
 
     private final List<CountryInfo> countryInfos;
@@ -23,14 +23,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RowView> {
     }
 
     @Override
-    public RowView onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RowViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.row_view, parent, false);
-        return new RowView(view);
+        return new RowViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RowView holder, int position) {
+    public void onBindViewHolder(RowViewHolder holder, int position) {
         holder.setData(getItemAt(position));
     }
 

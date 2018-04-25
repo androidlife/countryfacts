@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  */
 
-public class RowView extends RecyclerView.ViewHolder {
+public class RowViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -29,7 +29,7 @@ public class RowView extends RecyclerView.ViewHolder {
     private ImageLoadOptions imageLoadOptions;
 
 
-    public RowView(View view) {
+    public RowViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
         int imgWidth = view.getResources().getDimensionPixelSize(R.dimen.img_width);
