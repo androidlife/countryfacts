@@ -4,7 +4,6 @@ import com.countryfacts.BuildConfig;
 import com.countryfacts.model.Country;
 import com.countryfacts.model.deserializer.CountryDeserializer;
 import com.countryfacts.network.Urls;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
@@ -14,14 +13,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import timber.log.Timber;
 
 /**
  * Our Network service provider
  */
 
 public class ApiManager {
-    static volatile Retrofit retrofit;
+    private static volatile Retrofit retrofit;
     private static ApiService apiService;
 
     private ApiManager() {

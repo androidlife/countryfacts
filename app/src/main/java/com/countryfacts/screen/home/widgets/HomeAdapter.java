@@ -16,7 +16,7 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<RowView> {
 
 
-    private List<CountryInfo> countryInfos;
+    private final List<CountryInfo> countryInfos;
 
     public HomeAdapter(List<CountryInfo> countryInfos) {
         this.countryInfos = countryInfos;

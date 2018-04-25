@@ -26,7 +26,7 @@ public class RowView extends RecyclerView.ViewHolder {
     @BindView(R.id.img_view)
     ImageView imageView;
 
-    ImageLoadOptions imageLoadOptions;
+    private ImageLoadOptions imageLoadOptions;
 
 
     public RowView(View view) {

@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 
 public class CustomIdlingResource implements IdlingResource {
 
-    private AtomicBoolean idleNow = new AtomicBoolean(false);
+    private final AtomicBoolean idleNow = new AtomicBoolean(false);
     private volatile ResourceCallback callback;
 
 
@@ -31,14 +31,14 @@ public class CustomIdlingResource implements IdlingResource {
         this.callback = callback;
     }
 
-    private void setIdle(boolean idle) {
-        idleNow.set(idle);
-        if (idle && callback != null)
+    private void setIdle() {
+        idleNow.set(true);
+        if (callback != null)
             callback.onTransitionToIdle();
     }
 
     public void startCountdown(long countDown, TimeUnit timeUnit) {
-        Observable.timer(countDown, timeUnit).subscribe(l -> setIdle(true));
+        Observable.timer(countDown, timeUnit).subscribe(l -> setIdle());
     }
 
 

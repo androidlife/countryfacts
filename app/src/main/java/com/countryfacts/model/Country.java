@@ -2,9 +2,6 @@ package com.countryfacts.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
-
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 

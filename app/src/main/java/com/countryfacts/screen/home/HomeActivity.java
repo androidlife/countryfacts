@@ -12,9 +12,9 @@ import timber.log.Timber;
 public class HomeActivity extends BaseActivity implements HomeInteraction.Controller {
 
 
-    HomeView homeView;
-    HomeModel homeModel;
-    Country country;
+    private HomeView homeView;
+    private HomeModel homeModel;
+    private Country country;
 
     private static final String DATA_COUNTRY = "Country";
     private static final String VIEW_STATE = "ViewState";

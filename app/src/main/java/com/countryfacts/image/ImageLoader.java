@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
  */
 
 public class ImageLoader {
-    public static RequestOptions requestOptions;
+    static RequestOptions requestOptions;
 
     public static void loadImage(String url, ImageView imageView,
                                  ImageLoadOptions imageLoadOptions) {

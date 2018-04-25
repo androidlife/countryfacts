@@ -10,7 +10,7 @@ import android.view.View;
 
 public class RowItemSpace extends RecyclerView.ItemDecoration {
 
-    int left, top, right, bottom;
+    private final int left, top, right, bottom;
 
     public RowItemSpace(int left, int top, int right, int bottom) {
         this.left = left;

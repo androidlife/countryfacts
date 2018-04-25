@@ -7,9 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import io.reactivex.schedulers.Schedulers;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

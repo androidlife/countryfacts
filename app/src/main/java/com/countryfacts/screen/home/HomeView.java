@@ -31,9 +31,9 @@ public class HomeView implements HomeInteraction.View {
     @BindView(R.id.tv_error)
     TextView tvError;
 
-    int viewState;
-    HomeInteraction.Controller controller;
-    HomeAdapter homeAdapter;
+    private int viewState;
+    private HomeInteraction.Controller controller;
+    private HomeAdapter homeAdapter;
 
     public HomeView(View view, HomeInteraction.Controller controller) {
         ButterKnife.bind(this, view);
@@ -53,9 +53,7 @@ public class HomeView implements HomeInteraction.View {
         int bottom = resources.getDimensionPixelSize(R.dimen.row_space_bottom);
         RowItemSpace rowItemSpace = new RowItemSpace(left, top, right, bottom);
         recyclerView.addItemDecoration(rowItemSpace);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            controller.onRefresh();
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> controller.onRefresh());
 
     }
 
