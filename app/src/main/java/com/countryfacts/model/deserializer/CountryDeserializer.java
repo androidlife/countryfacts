@@ -41,10 +41,19 @@ public class CountryDeserializer implements JsonDeserializer<Country> {
                     countryInfo.description = descElement.getAsString();
                 if (!imgElement.isJsonNull())
                     countryInfo.imageHref = imgElement.getAsString();
-                if (!countryInfo.isDataEmpty())
+                if (!isDataEmpty(countryInfo))
                     country.countryInfos.add(countryInfo);
             }
         }
         return country;
+    }
+
+    private boolean isDataEmpty(CountryInfo countryInfo) {
+        return isEmpty(countryInfo.title) && isEmpty(countryInfo.description)
+                && isEmpty(countryInfo.imageHref);
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.trim().length() == 0;
     }
 }
