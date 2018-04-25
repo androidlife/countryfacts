@@ -13,6 +13,8 @@ public class GeneralUtil {
     public static boolean isConnectedToNetwork() {
         ConnectivityManager connectivityManager = (ConnectivityManager) MainApplication.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null)
+            return false;
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }

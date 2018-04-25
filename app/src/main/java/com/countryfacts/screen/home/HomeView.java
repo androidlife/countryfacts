@@ -34,14 +34,14 @@ public class HomeView implements HomeContracts.View {
 
     private int viewState;
     private final HomeContracts.Controller controller;
-    private HomeAdapter homeAdapter;
 
     public HomeView(View view, HomeContracts.Controller controller) {
         ButterKnife.bind(this, view);
         this.controller = controller;
         initViews(view.getContext());
     }
-     //initializing the view based upon R.layout.activity_home
+
+    //initializing the view based upon R.layout.activity_home
     private void initViews(Context context) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -54,7 +54,7 @@ public class HomeView implements HomeContracts.View {
         int bottom = resources.getDimensionPixelSize(R.dimen.row_space_bottom);
         RowItemSpace rowItemSpace = new RowItemSpace(left, top, right, bottom);
         recyclerView.addItemDecoration(rowItemSpace);
-        swipeRefreshLayout.setOnRefreshListener(() -> controller.onRefresh());
+        swipeRefreshLayout.setOnRefreshListener(controller::onRefresh);
 
     }
 
@@ -91,7 +91,7 @@ public class HomeView implements HomeContracts.View {
     public void populateList(Country country) {
         controller.getActionBar().setTitle(country.name);
         recyclerView.setVisibility(View.VISIBLE);
-        homeAdapter = new HomeAdapter(country.countryInfoList);
+        HomeAdapter homeAdapter = new HomeAdapter(country.countryInfoList);
         recyclerView.setAdapter(homeAdapter);
 
     }
